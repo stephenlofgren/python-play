@@ -18,13 +18,19 @@ def contents(folder, l = list()):
     return l
 
 def RecurseFolder(folder, delegate):
+    #print("Recursing folder ", folder)
     itemCount = 0
     directoryContents = os.listdir(folder)
     for item in directoryContents:
         if os.path.isfile(os.path.join(folder, item)):
+            if(str.startswith(item, '.')):
+                continue
             delegate(os.path.join(folder, item))
             itemCount += 1
-        else:itemCount += RecurseFolder(os.path.join(folder, item), delegate)
+        else:
+            folderCount = RecurseFolder(os.path.join(folder, item), delegate)
+            itemCount += folderCount
+            print(item, " ", folderCount)
     return itemCount
 
 def RecurseFolderOld(folder, delegate):

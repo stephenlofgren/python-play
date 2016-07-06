@@ -44,9 +44,7 @@ def HandleFile(file):
     pattern= re.compile(findPattern)
     match= re.search(pattern, file)
     if match is not None:    
-    	print(file)
-    else:
-        print(file)
+    	print(str.replace(file, file[match.pos:match.endpos], replaceString))
 
 
 def Replace():
